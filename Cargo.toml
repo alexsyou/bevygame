@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 bevy = { version = "0.13.2" }
 blake3 = { version = "1.5", features=["pure"] }
+bevy_ggrs = { version = "0.15" }
 
 [profile.dev]
 opt-level = 1
