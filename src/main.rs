@@ -1,4 +1,5 @@
 use bevy::audio::Volume;
+use bevy::log::LogPlugin;
 use bevy::prelude::*;
 use bevy::window::WindowResolution;
 use rand::Rng;
@@ -6,13 +7,20 @@ use std::f32::consts::PI;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins.set(WindowPlugin {
-            primary_window: Some(Window {
-                resolution: WindowResolution::new(600., 600.).with_scale_factor_override(1.0),
+        .add_plugins(DefaultPlugins
+            .set(WindowPlugin {
+                primary_window: Some(Window {
+                    resolution: WindowResolution::new(600., 600.).with_scale_factor_override(1.0),
+                    ..default()
+                }),
                 ..default()
-            }),
-            ..default()
-        }))
+            })
+            .set(LogPlugin {
+                filter: "info,bevy_winit=warn,bevy_render=warn,bevy_diagnostic=warn,bevy_window=warn".into(),
+                level: bevy::log::Level::DEBUG,
+                ..default()
+            }
+        ))
         .insert_resource(ClearColor(Color::rgb(0.7, 0.7, 0.7)))
         .insert_resource(Score { value: 0 })
         .add_systems(Startup, setup)
