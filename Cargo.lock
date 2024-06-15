@@ -1061,6 +1061,7 @@ dependencies = [
  "bevy",
  "bevy_ggrs",
  "blake3",
+ "rand",
 ]
 
 [[package]]
